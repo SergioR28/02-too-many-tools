@@ -1,0 +1,1248 @@
+[
+  {
+    "area": "citas",
+    "objetivo": true,
+    "desde": 15,
+    "definicion": {
+      "name": "consultar_cita",
+      "description": "Consulta los datos (hora, lugar) de una cita existente del usuario en un día concreto.",
+      "input_schema": {
+        "type": "object",
+        "properties": {
+          "cita_actual": {
+            "type": "string",
+            "description": "Día de la semana en minúsculas y sin tildes (lunes, martes, miercoles...)"
+          }
+        },
+        "required": [
+          "cita_actual"
+        ],
+        "additionalProperties": false
+      }
+    }
+  },
+  {
+    "area": "citas",
+    "objetivo": true,
+    "desde": 15,
+    "definicion": {
+      "name": "reprogramar_cita",
+      "description": "Mueve una cita existente del usuario a otro día. El sistema comprueba la disponibilidad.",
+      "input_schema": {
+        "type": "object",
+        "properties": {
+          "cita_actual": {
+            "type": "string",
+            "description": "Día de la semana en minúsculas y sin tildes (lunes, martes, miercoles...)"
+          },
+          "nueva_fecha": {
+            "type": "string",
+            "description": "Día de la semana en minúsculas y sin tildes (lunes, martes, miercoles...)"
+          },
+          "franja": {
+            "type": "string",
+            "enum": [
+              "manana",
+              "tarde",
+              "noche",
+              "ninguna"
+            ]
+          }
+        },
+        "required": [
+          "cita_actual",
+          "nueva_fecha",
+          "franja"
+        ],
+        "additionalProperties": false
+      }
+    }
+  },
+  {
+    "area": "citas",
+    "objetivo": true,
+    "desde": 15,
+    "definicion": {
+      "name": "cancelar_cita",
+      "description": "Cancela una cita existente del usuario en un día concreto.",
+      "input_schema": {
+        "type": "object",
+        "properties": {
+          "cita_actual": {
+            "type": "string",
+            "description": "Día de la semana en minúsculas y sin tildes (lunes, martes, miercoles...)"
+          }
+        },
+        "required": [
+          "cita_actual"
+        ],
+        "additionalProperties": false
+      }
+    }
+  },
+  {
+    "area": "citas",
+    "objetivo": false,
+    "desde": 15,
+    "definicion": {
+      "name": "consultar_historial_citas",
+      "description": "Lista las citas pasadas del usuario en los últimos meses.",
+      "input_schema": {
+        "type": "object",
+        "properties": {
+          "meses": {
+            "type": "integer"
+          }
+        },
+        "required": [
+          "meses"
+        ],
+        "additionalProperties": false
+      }
+    }
+  },
+  {
+    "area": "citas",
+    "objetivo": false,
+    "desde": 30,
+    "definicion": {
+      "name": "cancelar_reserva_sala",
+      "description": "Cancela la reserva de una sala de reuniones del negocio (uso interno del personal).",
+      "input_schema": {
+        "type": "object",
+        "properties": {
+          "sala": {
+            "type": "string"
+          },
+          "dia": {
+            "type": "string",
+            "description": "Día de la semana en minúsculas y sin tildes (lunes, martes, miercoles...)"
+          }
+        },
+        "required": [
+          "sala",
+          "dia"
+        ],
+        "additionalProperties": false
+      }
+    }
+  },
+  {
+    "area": "citas",
+    "objetivo": false,
+    "desde": 30,
+    "definicion": {
+      "name": "mover_turno_empleado",
+      "description": "Cambia el turno de trabajo de un empleado a otro día (uso interno del personal).",
+      "input_schema": {
+        "type": "object",
+        "properties": {
+          "empleado": {
+            "type": "string"
+          },
+          "dia_actual": {
+            "type": "string",
+            "description": "Día de la semana en minúsculas y sin tildes (lunes, martes, miercoles...)"
+          },
+          "dia_nuevo": {
+            "type": "string",
+            "description": "Día de la semana en minúsculas y sin tildes (lunes, martes, miercoles...)"
+          }
+        },
+        "required": [
+          "empleado",
+          "dia_actual",
+          "dia_nuevo"
+        ],
+        "additionalProperties": false
+      }
+    }
+  },
+  {
+    "area": "citas",
+    "objetivo": false,
+    "desde": 30,
+    "definicion": {
+      "name": "confirmar_asistencia",
+      "description": "Marca que el usuario asistirá a una cita ya programada.",
+      "input_schema": {
+        "type": "object",
+        "properties": {
+          "dia": {
+            "type": "string",
+            "description": "Día de la semana en minúsculas y sin tildes (lunes, martes, miercoles...)"
+          }
+        },
+        "required": [
+          "dia"
+        ],
+        "additionalProperties": false
+      }
+    }
+  },
+  {
+    "area": "citas",
+    "objetivo": false,
+    "desde": 60,
+    "definicion": {
+      "name": "crear_lista_espera",
+      "description": "Apunta al usuario en la lista de espera para un servicio sin huecos libres.",
+      "input_schema": {
+        "type": "object",
+        "properties": {
+          "servicio": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "servicio"
+        ],
+        "additionalProperties": false
+      }
+    }
+  },
+  {
+    "area": "citas",
+    "objetivo": false,
+    "desde": 60,
+    "definicion": {
+      "name": "anadir_nota_cita",
+      "description": "Añade una nota o comentario a una cita existente.",
+      "input_schema": {
+        "type": "object",
+        "properties": {
+          "dia": {
+            "type": "string",
+            "description": "Día de la semana en minúsculas y sin tildes (lunes, martes, miercoles...)"
+          },
+          "nota": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "dia",
+          "nota"
+        ],
+        "additionalProperties": false
+      }
+    }
+  },
+  {
+    "area": "citas",
+    "objetivo": false,
+    "desde": 60,
+    "definicion": {
+      "name": "consultar_horario_negocio",
+      "description": "Devuelve el horario de apertura del negocio.",
+      "input_schema": {
+        "type": "object",
+        "properties": {},
+        "additionalProperties": false
+      }
+    }
+  },
+  {
+    "area": "cuenta",
+    "objetivo": true,
+    "desde": 15,
+    "definicion": {
+      "name": "cambiar_telefono",
+      "description": "Cambia el número de teléfono de contacto del usuario.",
+      "input_schema": {
+        "type": "object",
+        "properties": {
+          "telefono": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "telefono"
+        ],
+        "additionalProperties": false
+      }
+    }
+  },
+  {
+    "area": "cuenta",
+    "objetivo": true,
+    "desde": 15,
+    "definicion": {
+      "name": "cambiar_email",
+      "description": "Cambia la dirección de correo electrónico del usuario.",
+      "input_schema": {
+        "type": "object",
+        "properties": {
+          "email": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "email"
+        ],
+        "additionalProperties": false
+      }
+    }
+  },
+  {
+    "area": "cuenta",
+    "objetivo": false,
+    "desde": 15,
+    "definicion": {
+      "name": "cambiar_telefono_empresa",
+      "description": "Cambia el teléfono público del negocio que aparece en la ficha (uso del administrador).",
+      "input_schema": {
+        "type": "object",
+        "properties": {
+          "telefono": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "telefono"
+        ],
+        "additionalProperties": false
+      }
+    }
+  },
+  {
+    "area": "cuenta",
+    "objetivo": false,
+    "desde": 30,
+    "definicion": {
+      "name": "cambiar_contrasena",
+      "description": "Inicia el cambio de contraseña del usuario.",
+      "input_schema": {
+        "type": "object",
+        "properties": {},
+        "additionalProperties": false
+      }
+    }
+  },
+  {
+    "area": "cuenta",
+    "objetivo": false,
+    "desde": 30,
+    "definicion": {
+      "name": "eliminar_cuenta",
+      "description": "Elimina definitivamente la cuenta del usuario.",
+      "input_schema": {
+        "type": "object",
+        "properties": {},
+        "additionalProperties": false
+      }
+    }
+  },
+  {
+    "area": "cuenta",
+    "objetivo": false,
+    "desde": 30,
+    "definicion": {
+      "name": "actualizar_direccion",
+      "description": "Actualiza la dirección postal del usuario.",
+      "input_schema": {
+        "type": "object",
+        "properties": {
+          "direccion": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "direccion"
+        ],
+        "additionalProperties": false
+      }
+    }
+  },
+  {
+    "area": "cuenta",
+    "objetivo": false,
+    "desde": 60,
+    "definicion": {
+      "name": "cambiar_idioma",
+      "description": "Cambia el idioma de la aplicación.",
+      "input_schema": {
+        "type": "object",
+        "properties": {
+          "idioma": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "idioma"
+        ],
+        "additionalProperties": false
+      }
+    }
+  },
+  {
+    "area": "cuenta",
+    "objetivo": false,
+    "desde": 60,
+    "definicion": {
+      "name": "exportar_datos_personales",
+      "description": "Genera una copia de todos los datos personales del usuario.",
+      "input_schema": {
+        "type": "object",
+        "properties": {},
+        "additionalProperties": false
+      }
+    }
+  },
+  {
+    "area": "cuenta",
+    "objetivo": false,
+    "desde": 60,
+    "definicion": {
+      "name": "verificar_email",
+      "description": "Reenvía el correo de verificación de la cuenta.",
+      "input_schema": {
+        "type": "object",
+        "properties": {},
+        "additionalProperties": false
+      }
+    }
+  },
+  {
+    "area": "cuenta",
+    "objetivo": false,
+    "desde": 60,
+    "definicion": {
+      "name": "cerrar_sesiones",
+      "description": "Cierra la sesión del usuario en todos los dispositivos.",
+      "input_schema": {
+        "type": "object",
+        "properties": {},
+        "additionalProperties": false
+      }
+    }
+  },
+  {
+    "area": "pagos",
+    "objetivo": true,
+    "desde": 15,
+    "definicion": {
+      "name": "consultar_factura",
+      "description": "Muestra la factura del usuario de un mes concreto.",
+      "input_schema": {
+        "type": "object",
+        "properties": {
+          "mes": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "mes"
+        ],
+        "additionalProperties": false
+      }
+    }
+  },
+  {
+    "area": "pagos",
+    "objetivo": true,
+    "desde": 15,
+    "definicion": {
+      "name": "pagar_pendiente",
+      "description": "Paga el importe pendiente del usuario con su método de pago guardado.",
+      "input_schema": {
+        "type": "object",
+        "properties": {},
+        "additionalProperties": false
+      }
+    }
+  },
+  {
+    "area": "pagos",
+    "objetivo": false,
+    "desde": 30,
+    "definicion": {
+      "name": "emitir_factura",
+      "description": "Emite una factura nueva a un cliente (uso del administrador).",
+      "input_schema": {
+        "type": "object",
+        "properties": {
+          "cliente": {
+            "type": "string"
+          },
+          "importe": {
+            "type": "number"
+          }
+        },
+        "required": [
+          "cliente",
+          "importe"
+        ],
+        "additionalProperties": false
+      }
+    }
+  },
+  {
+    "area": "pagos",
+    "objetivo": false,
+    "desde": 30,
+    "definicion": {
+      "name": "solicitar_reembolso",
+      "description": "Solicita la devolución de un pago ya realizado.",
+      "input_schema": {
+        "type": "object",
+        "properties": {
+          "motivo": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "motivo"
+        ],
+        "additionalProperties": false
+      }
+    }
+  },
+  {
+    "area": "pagos",
+    "objetivo": false,
+    "desde": 30,
+    "definicion": {
+      "name": "cambiar_metodo_pago",
+      "description": "Cambia la tarjeta o método de pago guardado del usuario.",
+      "input_schema": {
+        "type": "object",
+        "properties": {},
+        "additionalProperties": false
+      }
+    }
+  },
+  {
+    "area": "pagos",
+    "objetivo": false,
+    "desde": 60,
+    "definicion": {
+      "name": "consultar_tarifas",
+      "description": "Muestra la lista de precios de los servicios.",
+      "input_schema": {
+        "type": "object",
+        "properties": {},
+        "additionalProperties": false
+      }
+    }
+  },
+  {
+    "area": "pagos",
+    "objetivo": false,
+    "desde": 60,
+    "definicion": {
+      "name": "descargar_factura_proveedor",
+      "description": "Descarga una factura de un proveedor del negocio (uso interno).",
+      "input_schema": {
+        "type": "object",
+        "properties": {
+          "proveedor": {
+            "type": "string"
+          },
+          "mes": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "proveedor",
+          "mes"
+        ],
+        "additionalProperties": false
+      }
+    }
+  },
+  {
+    "area": "pagos",
+    "objetivo": false,
+    "desde": 60,
+    "definicion": {
+      "name": "aplicar_cupon",
+      "description": "Aplica un código de descuento a la próxima compra.",
+      "input_schema": {
+        "type": "object",
+        "properties": {
+          "codigo": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "codigo"
+        ],
+        "additionalProperties": false
+      }
+    }
+  },
+  {
+    "area": "pagos",
+    "objetivo": false,
+    "desde": 60,
+    "definicion": {
+      "name": "consultar_saldo_bono",
+      "description": "Muestra cuántas sesiones quedan en el bono del usuario.",
+      "input_schema": {
+        "type": "object",
+        "properties": {},
+        "additionalProperties": false
+      }
+    }
+  },
+  {
+    "area": "pagos",
+    "objetivo": false,
+    "desde": 60,
+    "definicion": {
+      "name": "anular_factura",
+      "description": "Anula una factura emitida por error (uso del administrador).",
+      "input_schema": {
+        "type": "object",
+        "properties": {
+          "numero": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "numero"
+        ],
+        "additionalProperties": false
+      }
+    }
+  },
+  {
+    "area": "notificaciones",
+    "objetivo": true,
+    "desde": 15,
+    "definicion": {
+      "name": "activar_recordatorios",
+      "description": "Activa los recordatorios de citas del usuario por el canal indicado.",
+      "input_schema": {
+        "type": "object",
+        "properties": {
+          "canal": {
+            "type": "string",
+            "enum": [
+              "sms",
+              "email",
+              "whatsapp"
+            ]
+          }
+        },
+        "required": [
+          "canal"
+        ],
+        "additionalProperties": false
+      }
+    }
+  },
+  {
+    "area": "notificaciones",
+    "objetivo": true,
+    "desde": 15,
+    "definicion": {
+      "name": "desactivar_recordatorios",
+      "description": "Desactiva los recordatorios de citas del usuario por el canal indicado.",
+      "input_schema": {
+        "type": "object",
+        "properties": {
+          "canal": {
+            "type": "string",
+            "enum": [
+              "sms",
+              "email",
+              "whatsapp"
+            ]
+          }
+        },
+        "required": [
+          "canal"
+        ],
+        "additionalProperties": false
+      }
+    }
+  },
+  {
+    "area": "notificaciones",
+    "objetivo": false,
+    "desde": 15,
+    "definicion": {
+      "name": "cancelar_suscripcion_newsletter",
+      "description": "Da de baja al usuario del boletín de novedades y promociones.",
+      "input_schema": {
+        "type": "object",
+        "properties": {},
+        "additionalProperties": false
+      }
+    }
+  },
+  {
+    "area": "notificaciones",
+    "objetivo": false,
+    "desde": 30,
+    "definicion": {
+      "name": "enviar_newsletter",
+      "description": "Envía el boletín de novedades a todos los clientes (uso del administrador).",
+      "input_schema": {
+        "type": "object",
+        "properties": {
+          "asunto": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "asunto"
+        ],
+        "additionalProperties": false
+      }
+    }
+  },
+  {
+    "area": "notificaciones",
+    "objetivo": false,
+    "desde": 60,
+    "definicion": {
+      "name": "configurar_alertas_stock",
+      "description": "Configura avisos cuando un producto del almacén baja de cierto nivel (uso interno).",
+      "input_schema": {
+        "type": "object",
+        "properties": {
+          "producto": {
+            "type": "string"
+          },
+          "minimo": {
+            "type": "integer"
+          }
+        },
+        "required": [
+          "producto",
+          "minimo"
+        ],
+        "additionalProperties": false
+      }
+    }
+  },
+  {
+    "area": "notificaciones",
+    "objetivo": false,
+    "desde": 60,
+    "definicion": {
+      "name": "suscribir_ofertas",
+      "description": "Suscribe al usuario a ofertas y promociones.",
+      "input_schema": {
+        "type": "object",
+        "properties": {},
+        "additionalProperties": false
+      }
+    }
+  },
+  {
+    "area": "notificaciones",
+    "objetivo": false,
+    "desde": 60,
+    "definicion": {
+      "name": "programar_aviso_interno",
+      "description": "Programa un aviso para el personal del negocio (uso interno).",
+      "input_schema": {
+        "type": "object",
+        "properties": {
+          "mensaje": {
+            "type": "string"
+          },
+          "dia": {
+            "type": "string",
+            "description": "Día de la semana en minúsculas y sin tildes (lunes, martes, miercoles...)"
+          }
+        },
+        "required": [
+          "mensaje",
+          "dia"
+        ],
+        "additionalProperties": false
+      }
+    }
+  },
+  {
+    "area": "notificaciones",
+    "objetivo": false,
+    "desde": 60,
+    "definicion": {
+      "name": "cambiar_horario_notificaciones",
+      "description": "Cambia las horas a las que el usuario acepta recibir notificaciones.",
+      "input_schema": {
+        "type": "object",
+        "properties": {
+          "desde": {
+            "type": "string"
+          },
+          "hasta": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "desde",
+          "hasta"
+        ],
+        "additionalProperties": false
+      }
+    }
+  },
+  {
+    "area": "notificaciones",
+    "objetivo": false,
+    "desde": 60,
+    "definicion": {
+      "name": "enviar_sms_masivo",
+      "description": "Envía un SMS a todos los clientes (uso del administrador).",
+      "input_schema": {
+        "type": "object",
+        "properties": {
+          "mensaje": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "mensaje"
+        ],
+        "additionalProperties": false
+      }
+    }
+  },
+  {
+    "area": "notificaciones",
+    "objetivo": false,
+    "desde": 60,
+    "definicion": {
+      "name": "silenciar_chat",
+      "description": "Silencia las notificaciones del chat de soporte.",
+      "input_schema": {
+        "type": "object",
+        "properties": {},
+        "additionalProperties": false
+      }
+    }
+  },
+  {
+    "area": "documentos",
+    "objetivo": true,
+    "desde": 15,
+    "definicion": {
+      "name": "solicitar_justificante",
+      "description": "Genera un justificante de asistencia de una cita a la que el usuario ya acudió.",
+      "input_schema": {
+        "type": "object",
+        "properties": {
+          "dia": {
+            "type": "string",
+            "description": "Día de la semana en minúsculas y sin tildes (lunes, martes, miercoles...)"
+          }
+        },
+        "required": [
+          "dia"
+        ],
+        "additionalProperties": false
+      }
+    }
+  },
+  {
+    "area": "documentos",
+    "objetivo": true,
+    "desde": 15,
+    "definicion": {
+      "name": "descargar_informe",
+      "description": "Descarga el informe o resumen del servicio realizado en una cita pasada.",
+      "input_schema": {
+        "type": "object",
+        "properties": {
+          "dia": {
+            "type": "string",
+            "description": "Día de la semana en minúsculas y sin tildes (lunes, martes, miercoles...)"
+          }
+        },
+        "required": [
+          "dia"
+        ],
+        "additionalProperties": false
+      }
+    }
+  },
+  {
+    "area": "documentos",
+    "objetivo": false,
+    "desde": 30,
+    "definicion": {
+      "name": "subir_documento",
+      "description": "Sube un documento del usuario a su ficha.",
+      "input_schema": {
+        "type": "object",
+        "properties": {
+          "nombre": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "nombre"
+        ],
+        "additionalProperties": false
+      }
+    }
+  },
+  {
+    "area": "documentos",
+    "objetivo": false,
+    "desde": 30,
+    "definicion": {
+      "name": "firmar_consentimiento",
+      "description": "Firma un consentimiento informado antes de un servicio.",
+      "input_schema": {
+        "type": "object",
+        "properties": {
+          "servicio": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "servicio"
+        ],
+        "additionalProperties": false
+      }
+    }
+  },
+  {
+    "area": "documentos",
+    "objetivo": false,
+    "desde": 60,
+    "definicion": {
+      "name": "solicitar_presupuesto",
+      "description": "Solicita un presupuesto para un servicio.",
+      "input_schema": {
+        "type": "object",
+        "properties": {
+          "servicio": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "servicio"
+        ],
+        "additionalProperties": false
+      }
+    }
+  },
+  {
+    "area": "documentos",
+    "objetivo": false,
+    "desde": 60,
+    "definicion": {
+      "name": "generar_contrato",
+      "description": "Genera un contrato para un empleado nuevo (uso interno).",
+      "input_schema": {
+        "type": "object",
+        "properties": {
+          "empleado": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "empleado"
+        ],
+        "additionalProperties": false
+      }
+    }
+  },
+  {
+    "area": "documentos",
+    "objetivo": false,
+    "desde": 60,
+    "definicion": {
+      "name": "archivar_documento",
+      "description": "Archiva un documento antiguo de la ficha del usuario.",
+      "input_schema": {
+        "type": "object",
+        "properties": {
+          "nombre": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "nombre"
+        ],
+        "additionalProperties": false
+      }
+    }
+  },
+  {
+    "area": "documentos",
+    "objetivo": false,
+    "desde": 60,
+    "definicion": {
+      "name": "compartir_documento",
+      "description": "Comparte un documento de la ficha con otra persona por email.",
+      "input_schema": {
+        "type": "object",
+        "properties": {
+          "nombre": {
+            "type": "string"
+          },
+          "email": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "nombre",
+          "email"
+        ],
+        "additionalProperties": false
+      }
+    }
+  },
+  {
+    "area": "documentos",
+    "objetivo": false,
+    "desde": 60,
+    "definicion": {
+      "name": "eliminar_documento",
+      "description": "Elimina un documento de la ficha del usuario.",
+      "input_schema": {
+        "type": "object",
+        "properties": {
+          "nombre": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "nombre"
+        ],
+        "additionalProperties": false
+      }
+    }
+  },
+  {
+    "area": "documentos",
+    "objetivo": false,
+    "desde": 60,
+    "definicion": {
+      "name": "traducir_documento",
+      "description": "Traduce un documento de la ficha a otro idioma.",
+      "input_schema": {
+        "type": "object",
+        "properties": {
+          "nombre": {
+            "type": "string"
+          },
+          "idioma": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "nombre",
+          "idioma"
+        ],
+        "additionalProperties": false
+      }
+    }
+  },
+  {
+    "area": "soporte",
+    "objetivo": true,
+    "desde": 15,
+    "definicion": {
+      "name": "hablar_con_persona",
+      "description": "Transfiere la conversación a un agente humano de atención al cliente.",
+      "input_schema": {
+        "type": "object",
+        "properties": {
+          "motivo": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "motivo"
+        ],
+        "additionalProperties": false
+      }
+    }
+  },
+  {
+    "area": "soporte",
+    "objetivo": false,
+    "desde": 30,
+    "definicion": {
+      "name": "abrir_incidencia_tecnica",
+      "description": "Abre una incidencia técnica por un fallo de la aplicación.",
+      "input_schema": {
+        "type": "object",
+        "properties": {
+          "descripcion": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "descripcion"
+        ],
+        "additionalProperties": false
+      }
+    }
+  },
+  {
+    "area": "soporte",
+    "objetivo": false,
+    "desde": 30,
+    "definicion": {
+      "name": "enviar_queja_formal",
+      "description": "Registra una hoja de reclamación formal.",
+      "input_schema": {
+        "type": "object",
+        "properties": {
+          "motivo": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "motivo"
+        ],
+        "additionalProperties": false
+      }
+    }
+  },
+  {
+    "area": "soporte",
+    "objetivo": false,
+    "desde": 30,
+    "definicion": {
+      "name": "valorar_servicio",
+      "description": "Registra la valoración del usuario sobre un servicio recibido.",
+      "input_schema": {
+        "type": "object",
+        "properties": {
+          "puntuacion": {
+            "type": "integer"
+          },
+          "comentario": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "puntuacion",
+          "comentario"
+        ],
+        "additionalProperties": false
+      }
+    }
+  },
+  {
+    "area": "soporte",
+    "objetivo": false,
+    "desde": 60,
+    "definicion": {
+      "name": "consultar_faq",
+      "description": "Busca la respuesta en las preguntas frecuentes.",
+      "input_schema": {
+        "type": "object",
+        "properties": {
+          "pregunta": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "pregunta"
+        ],
+        "additionalProperties": false
+      }
+    }
+  },
+  {
+    "area": "soporte",
+    "objetivo": false,
+    "desde": 60,
+    "definicion": {
+      "name": "reportar_error_app",
+      "description": "Envía un informe automático de error de la aplicación.",
+      "input_schema": {
+        "type": "object",
+        "properties": {},
+        "additionalProperties": false
+      }
+    }
+  },
+  {
+    "area": "soporte",
+    "objetivo": false,
+    "desde": 60,
+    "definicion": {
+      "name": "solicitar_llamada_comercial",
+      "description": "Pide que un comercial llame al usuario para contratar servicios.",
+      "input_schema": {
+        "type": "object",
+        "properties": {
+          "telefono": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "telefono"
+        ],
+        "additionalProperties": false
+      }
+    }
+  },
+  {
+    "area": "soporte",
+    "objetivo": false,
+    "desde": 60,
+    "definicion": {
+      "name": "cerrar_ticket",
+      "description": "Cierra un ticket de soporte abierto.",
+      "input_schema": {
+        "type": "object",
+        "properties": {
+          "numero": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "numero"
+        ],
+        "additionalProperties": false
+      }
+    }
+  },
+  {
+    "area": "soporte",
+    "objetivo": false,
+    "desde": 60,
+    "definicion": {
+      "name": "consultar_estado_ticket",
+      "description": "Consulta el estado de un ticket de soporte.",
+      "input_schema": {
+        "type": "object",
+        "properties": {
+          "numero": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "numero"
+        ],
+        "additionalProperties": false
+      }
+    }
+  },
+  {
+    "area": "soporte",
+    "objetivo": false,
+    "desde": 60,
+    "definicion": {
+      "name": "sugerir_mejora",
+      "description": "Envía una sugerencia de mejora para la aplicación.",
+      "input_schema": {
+        "type": "object",
+        "properties": {
+          "texto": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "texto"
+        ],
+        "additionalProperties": false
+      }
+    }
+  }
+]
